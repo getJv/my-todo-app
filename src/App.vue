@@ -1,28 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>Todo</span>
+        <span class="font-weight-light">APP</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+    </v-toolbar>
+
+    <v-content>
+      <todo-list></todo-list>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TodoList from "./components/TodoList";
+import axios from "axios";
 
 export default {
-  name: 'app',
+  name: "App",
   components: {
-    HelloWorld
+    TodoList
+  },
+  created() {
+    var url = "http://localhost:3000/issues.json"
+    axios.get(url)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  },
+  data() {
+    return {
+      //
+    };
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
